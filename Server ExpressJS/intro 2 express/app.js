@@ -16,7 +16,7 @@ app.use((req,res)=>{
     res.send(`<h1>Welcome To Express</h1>`)
 })
 
-
+//creates server and call listen method on server object using apply
 app.listen(3000);
 
 
