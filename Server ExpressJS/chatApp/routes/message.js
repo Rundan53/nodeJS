@@ -8,9 +8,8 @@ router.get('/',(req, res, next) => {
     fs.readFile('data.txt','utf-8',(err, data) => {
         if(err){
             console.log(err.message);
-        }
-        else{
-            
+            data='no chat exists';
+        }   
             res.send(`<form onsubmit="document.getElementById('userName').value= localStorage.getItem('userName')" action="/" method="POST">
             <body>${data}</body><br>
             <body>
@@ -19,16 +18,16 @@ router.get('/',(req, res, next) => {
             <button type="submit">Send</button>
             </body>
             </form>`);
-        }
-    })
+        
+    });
    
-})
+});
 
 router.post('/', (req, res, next) => {
     const userName = req.body.userName;
     const message = req.body.message;
 
-    fs.appendFile('data.txt', `${userName}:${message}`,(err,data)=>{
+    fs.writeFile('data.txt', `${userName}:${message}`, {flag:'a'}, (err,data)=>{
         res.redirect('/');
     });
 })
