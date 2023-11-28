@@ -15,9 +15,7 @@ app.use(express.static(path.join(rootDir,'public')))
 app.use(`/admin`,adminRoutes);
 app.use(shopRoutes);
 
-app.use((req,res,next) => {
-    res.status(404).sendFile(path.join(rootDir, 'views', '404.html'))
-})
+app.use(require('./controllers/error.js').error)
 
 //creates server and call listen method on server object using 'apply'
 app.listen(3000);
